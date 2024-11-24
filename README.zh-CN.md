@@ -1,15 +1,15 @@
-﻿## Introduction
+﻿## 介绍
 
-This project provides a naming converter for Entity Framework Core to convert table and column names to specified naming conventions. The source code refers to the naming strategy implementation in the System.Text.Json library. It is currently in preview and may have some issues. We welcome suggestions to help us improve it.
+该项目为 Entity Framework Core 提供了一个命名转换器，用于将表名和列名转换为指定的命名规则，源码参阅 System.Text.Json 库中命名策略实现，目前是预览版，可能会有一些问题，欢迎大家提出建议，让我们改进它。
 
-## Installation
-
+## 安装
 ```shell
 dotnet add package EfCore.NamingConverter
 ```
-## Usage
+## 使用
 
-Using the naming converter in the DbContext class is the default configuration method by Microsoft. You only need to add the naming converter in the ConfigureConventions method. In the next version, we are considering providing DbContextOptions configuration options for easier configuration.
+在 DbContext 类中使用命名转换器是微软默认的配置方式，只需要在 ConfigureConventions 方法中添加命名转换器即可，下一个版本考虑提供 DbContextOptions 配置项，方便配置。
+
 ```csharp
 
 public class MyDbContext : DbContext
@@ -21,7 +21,7 @@ public class MyDbContext : DbContext
 }
 ```
 
-## Rules
+## 规则
 
 | Naming Policy  | Original | Converted |
 |----------------|--------------|--------------|
