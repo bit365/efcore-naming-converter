@@ -29,6 +29,9 @@ jobs:
     - name: Install GitVersion
       run: dotnet tool install --global GitVersion.Tool
 
+    - name: Add GitVersion to PATH
+      run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
     - name: Generate Version
       id: gitversion
       run: gitversion /output json /showvariable FullSemVer
