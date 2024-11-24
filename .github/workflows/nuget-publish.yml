@@ -28,18 +28,6 @@ jobs:
       with:
         dotnet-version: 9.0.x
 
-    - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v3.0.3
-      with:
-        versionSpec: '6.x'
-
-    - name: Determine Version
-      id: version_step # step id used as reference for output values
-      uses: gittools/actions/gitversion/execute@v3.0.3
-
-    - name: Output Version
-      run: echo "current version is ${{ steps.version_step.outputs.fullSemVer }}"
-
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ${{ env.PROJECT_DIR }}
@@ -49,7 +37,7 @@ jobs:
       working-directory: ${{ env.PROJECT_DIR }}
 
     - name: Pack
-      run: dotnet pack --configuration Release --no-build --output ./nupkg /p:PackageVersion=${{ steps.version_step.outputs.majorMinorPatch }}
+      run: dotnet pack --configuration Release --no-build --output ./nupkg
       working-directory: ${{ env.PROJECT_DIR }}
 
     - name: Upload NuGet package
