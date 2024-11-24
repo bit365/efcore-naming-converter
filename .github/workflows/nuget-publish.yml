@@ -11,28 +11,35 @@ jobs:
 
     strategy:
       matrix:
-        dotnet-version: ['8.x.x', '9.x.x']  # 设置多个 .NET 版本
+        dotnet-version: ['8.0.x', '9.0.x']  # 设置多个 .NET 版本
+
+    env:
+      PROJECT_DIR: EfCore.NamingConverter  # 定义环境变量
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ matrix.dotnet-version }}  # 使用矩阵中的 .NET 版本
 
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: ${{ env.PROJECT_DIR }}  # 使用环境变量指定工作目录
 
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      working-directory: ${{ env.PROJECT_DIR }}  # 使用环境变量指定工作目录
 
     - name: Pack
       run: dotnet pack --configuration Release --no-build --output ./nupkg
+      working-directory: ${{ env.PROJECT_DIR }}  # 使用环境变量指定工作目录
 
     - name: Publish to NuGet
       if: github.ref == 'refs/heads/main'  # 仅在推送到 main 分支时发布
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  # 从 GitHub Secrets 中获取 NuGet API 密钥
       run: dotnet nuget push ./nupkg/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+      working-directory: ${{ env.PROJECT_DIR }}  # 使用环境变量指定工作目录
