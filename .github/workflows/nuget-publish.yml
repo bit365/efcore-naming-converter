@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        dotnet-version: ['8.0.x', '9.0.x']  # 设置多个 .NET 版本
+        dotnet-version: ['8.x.x', '9.x.x']  # 设置多个 .NET 版本
 
     steps:
     - name: Checkout repository
