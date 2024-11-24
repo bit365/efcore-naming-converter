@@ -37,6 +37,9 @@ jobs:
       id: version_step # step id used as reference for output values
       uses: gittools/actions/gitversion/execute@v3.0.3
 
+    - name: Output Version
+      run: echo "current version is ${{ steps.version_step.outputs.majorMinorPatch }}"
+
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ${{ env.PROJECT_DIR }}
