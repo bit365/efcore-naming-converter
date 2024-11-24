@@ -4,7 +4,10 @@
 		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<Version>1.0.2</Version>
+		<Authors>bit365</Authors>
+		<Description>Entity Framework Core Naming Converter</Description>
+		<RepositoryUrl>https://github.com/bit365/EfCore.NamingConverter</RepositoryUrl>
+		<ReadMe>README.md</ReadMe>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">

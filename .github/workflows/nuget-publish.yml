@@ -26,6 +26,13 @@ jobs:
       with:
         dotnet-version: 9.0.x
 
+    - name: Install GitVersion
+      run: dotnet tool install --global GitVersion.Tool
+
+    - name: Generate Version
+      id: gitversion
+      run: gitversion /output json /showvariable FullSemVer
+
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ${{ env.PROJECT_DIR }}
@@ -35,8 +42,14 @@ jobs:
       working-directory: ${{ env.PROJECT_DIR }}
 
     - name: Pack
-      run: dotnet pack --configuration Release --no-build --output ./nupkg
+      run: dotnet pack --configuration Release --no-build --output ./nupkg /p:PackageVersion=${{ steps.gitversion.outputs.FullSemVer }}
       working-directory: ${{ env.PROJECT_DIR }}
+
+    - name: Upload NuGet package
+      uses: actions/upload-artifact@v3
+      with:
+        name: nuget-package
+        path: ${{ env.PROJECT_DIR }}/nupkg/*.nupkg
 
     - name: Publish to NuGet
       if: github.ref == 'refs/heads/main'
