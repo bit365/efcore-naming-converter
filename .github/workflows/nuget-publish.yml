@@ -38,7 +38,7 @@ jobs:
       uses: gittools/actions/gitversion/execute@v3.0.3
 
     - name: Output Version
-      run: echo "current version is ${{ steps.version_step.outputs.majorMinorPatch }}"
+      run: echo "current version is ${{ steps.version_step.outputs.fullSemVer }}"
 
     - name: Restore dependencies
       run: dotnet restore
@@ -62,5 +62,5 @@ jobs:
       if: github.ref == 'refs/heads/main'
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      run: dotnet nuget push ./nupkg/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./nupkg/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
       working-directory: ${{ env.PROJECT_DIR }}
