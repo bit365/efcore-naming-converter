@@ -46,7 +46,7 @@ jobs:
       working-directory: ${{ env.PROJECT_DIR }}
 
     - name: Pack
-      run: dotnet pack --configuration Release --no-build --output ./nupkg /p:PackageVersion=${{ steps.version_step.outputs.fullSemVer }}
+      run: dotnet pack --configuration Release --no-build --output ./nupkg /p:PackageVersion=${{ steps.version_step.outputs.majorMinorPatch }}
       working-directory: ${{ env.PROJECT_DIR }}
 
     - name: Upload NuGet package
