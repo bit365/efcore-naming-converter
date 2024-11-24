@@ -17,7 +17,7 @@ namespace EfCore.NamingConverter
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
-            configurationBuilder.AddNamingConventions(NamingPolicy.SnakeCaseLower);
+            configurationBuilder.AddNamingConventions(NamingPolicy.CamelCase);
         }
     }
 }
