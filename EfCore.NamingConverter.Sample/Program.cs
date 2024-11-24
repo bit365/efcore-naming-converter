@@ -1,4 +1,4 @@
-﻿using EfCore.NamingConverter;
+﻿using EfCore.NamingConverter.Sample;
 
 MyDbContext context = new();
 

@@ -13,6 +13,7 @@ dotnet add package EfCore.NamingConverter
 
 Using the naming converter in the DbContext class is the default configuration method by Microsoft. You only need to add the naming converter in the ConfigureConventions method. In the next version, we are considering providing DbContextOptions configuration options for easier configuration.
 ```csharp
+using EfCore.NamingConverter;
 
 public class MyDbContext : DbContext
 {
@@ -27,12 +28,12 @@ public class MyDbContext : DbContext
 
 | Naming Policy  | Original | Converted |
 |----------------|--------------|--------------|
-| PascalCase(Default)     | OrderItem  | OrderItem  |
-| CamelCase      | OrderItem  | orderItem  |
-| SnakeCaseLower | OrderItem  | order_item |
-| SnakeCaseUpper | OrderItem  | ORDER_ITEM |
-| KebabCaseLower | OrderItem  | order-item |
-| KebabCaseUpper | OrderItem  | ORDER-ITEM |
+| PascalCase(Default)     | FullName  | FullName  |
+| CamelCase      | FullName  | fullName  |
+| SnakeCaseLower | FullName  | full_name |
+| SnakeCaseUpper | FullName  | FULL_NAME |
+| KebabCaseLower | FullName  | full-name |
+| KebabCaseUpper | FullName  | FULL-NAME |
 
 ## Github
 

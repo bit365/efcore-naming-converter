@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace EfCore.NamingConverter
+namespace EfCore.NamingConverter.Sample
 {
     public class MyDbContext : DbContext
     {
@@ -12,12 +12,12 @@ namespace EfCore.NamingConverter
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("Host=localhost;Database=testdb;Username=postgres;Password=postgres");
+            optionsBuilder.UseNpgsql("Host=localhost;Database=mydb;Username=postgres;Password=postgres");
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
-            configurationBuilder.AddNamingConventions(NamingPolicy.CamelCase);
+            configurationBuilder.AddNamingConventions(NamingPolicy.SnakeCaseLower);
         }
     }
 }

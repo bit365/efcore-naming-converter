@@ -1,6 +1,6 @@
-using EfCore.NamingConverter;
+using Microsoft.EntityFrameworkCore;
 
-namespace Microsoft.EntityFrameworkCore
+namespace EfCore.NamingConverter
 {
     public static class Extensions
     {
