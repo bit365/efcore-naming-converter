@@ -10,10 +10,10 @@ dotnet add package EfCore.NamingConverter
 
 public class MyDbContext : DbContext
 {
-	protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
-	{
-		configurationBuilder.AddNamingConventions(NamingPolicy.SnakeCaseLower);
-	}
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.AddNamingConventions(NamingPolicy.SnakeCaseLower);
+    }
 }
 ```
 
