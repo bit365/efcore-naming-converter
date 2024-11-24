@@ -9,37 +9,38 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        dotnet: [ '8.x', '9.x' ]
-
     env:
-      PROJECT_DIR: EfCore.NamingConverter  # 定义环境变量
+      PROJECT_DIR: EfCore.NamingConverter  # 工作目录
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Setup .NET
+    - name: Setup .NET 8.x
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: ${{ matrix.dotnet }}  # 使用矩阵中的 .NET 版本
+        dotnet-version: 8.0.x
+
+    - name: Setup .NET 9.x
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
 
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ${{ env.PROJECT_DIR }}  # 使用环境变量指定工作目录
+      working-directory: ${{ env.PROJECT_DIR }}
 
     - name: Build
       run: dotnet build --configuration Release --no-restore
-      working-directory: ${{ env.PROJECT_DIR }}  # 使用环境变量指定工作目录
+      working-directory: ${{ env.PROJECT_DIR }}
 
     - name: Pack
       run: dotnet pack --configuration Release --no-build --output ./nupkg
-      working-directory: ${{ env.PROJECT_DIR }}  # 使用环境变量指定工作目录
+      working-directory: ${{ env.PROJECT_DIR }}
 
     - name: Publish to NuGet
-      if: github.ref == 'refs/heads/main'  # 仅在推送到 main 分支时发布
+      if: github.ref == 'refs/heads/main'
       env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  # 从 GitHub Secrets 中获取 NuGet API 密钥
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run: dotnet nuget push ./nupkg/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
-      working-directory: ${{ env.PROJECT_DIR }}  # 使用环境变量指定工作目录
+      working-directory: ${{ env.PROJECT_DIR }}
