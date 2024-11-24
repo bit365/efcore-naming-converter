@@ -9,13 +9,8 @@ namespace EfCore.NamingConverter
         public void ProcessPropertyAdded(IConventionPropertyBuilder propertyBuilder, IConventionContext<IConventionPropertyBuilder> context)
         {
             ConvertNamingPolicy convertNamingPolicy = ConvertNamingPolicy.From(namingPolicy);
-
             string propertyName = propertyBuilder.Metadata.GetColumnName();
-
-            if (propertyName != null)
-            {
-                propertyBuilder.HasColumnName(convertNamingPolicy.ConvertName(propertyName));
-            }
+            propertyBuilder.HasColumnName(convertNamingPolicy.ConvertName(propertyName));
         }
     }
 }
