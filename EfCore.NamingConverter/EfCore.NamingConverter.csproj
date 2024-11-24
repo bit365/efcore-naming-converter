@@ -7,7 +7,7 @@
 		<Authors>bit365</Authors>
 		<Description>Entity Framework Core Naming Converter</Description>
 		<RepositoryUrl>https://github.com/bit365/efcore-naming-converter</RepositoryUrl>
-		<PackageReadmeFile>..\README.md</PackageReadmeFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Version>1.0.5</Version>
 	</PropertyGroup>
 
@@ -19,6 +19,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<InternalsVisibleTo Include="EfCore.NamingConverter.Tests" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="..\README.md" Link="README.md" />
 	</ItemGroup>
 
 </Project>
