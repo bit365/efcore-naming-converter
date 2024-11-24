@@ -31,3 +31,9 @@ public class MyDbContext : DbContext
 | SnakeCaseUpper | OrderItem  | ORDER_ITEM |
 | KebabCaseLower | OrderItem  | order-item |
 | KebabCaseUpper | OrderItem  | ORDER-ITEM |
+
+## Github
+
+https://github.com/bit365/efcore-naming-converter
+
+If you are interested in this project, feel free to star and fork it. You are also welcome to submit issues and pull requests to help us improve the project.
