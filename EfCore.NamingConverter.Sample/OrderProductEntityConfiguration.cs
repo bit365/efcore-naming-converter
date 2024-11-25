@@ -7,8 +7,9 @@ namespace EfCore.NamingConverter.Sample
     {
         public void Configure(EntityTypeBuilder<OrderProduct> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => new { x.Id, x.CategoryId });
             builder.Property(x => x.ProductName).HasMaxLength(100);
+            builder.HasIndex(x => x.ProductName).IsUnique();
         }
     }
 }

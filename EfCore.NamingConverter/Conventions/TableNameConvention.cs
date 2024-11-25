@@ -1,19 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EfCore.NamingConverter.Converters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-namespace EfCore.NamingConverter
+namespace EfCore.NamingConverter.Conventions
 {
-    public class TableNameConvention(NamingPolicy namingPolicy) : IEntityTypeAddedConvention
+    public class TableNameConvention(NameConverter converter) : IEntityTypeAddedConvention
     {
         public void ProcessEntityTypeAdded(IConventionEntityTypeBuilder entityTypeBuilder, IConventionContext<IConventionEntityTypeBuilder> context)
         {
-            ConvertNamingPolicy convertNamingPolicy = ConvertNamingPolicy.From(namingPolicy);
-
             string? tableName = entityTypeBuilder.Metadata.GetTableName();
+
             if (tableName != null)
             {
-                entityTypeBuilder.ToTable(convertNamingPolicy.ConvertName(tableName));
+                entityTypeBuilder.ToTable(converter.ConvertName(tableName));
             }
         }
     }

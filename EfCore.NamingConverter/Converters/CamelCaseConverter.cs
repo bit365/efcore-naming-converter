@@ -1,6 +1,6 @@
-﻿namespace EfCore.NamingConverter
+﻿namespace EfCore.NamingConverter.Converters
 {
-    internal sealed class CamelCaseNamingPolicy : ConvertNamingPolicy
+    internal sealed class CamelCaseConverter : NameConverter
     {
         public override string ConvertName(string name)
         {
@@ -25,7 +25,7 @@
                     break;
                 }
 
-                bool hasNext = (i + 1 < chars.Length);
+                bool hasNext = i + 1 < chars.Length;
 
                 // Stop when next char is already lowercase.
                 if (i > 0 && hasNext && !char.IsUpper(chars[i + 1]))

@@ -3,14 +3,14 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
-namespace EfCore.NamingConverter
+namespace EfCore.NamingConverter.Converters
 {
-    internal abstract class SeparatorNamingPolicy : ConvertNamingPolicy
+    internal abstract class SeparatorConverter : NameConverter
     {
         private readonly bool _lowercase;
         private readonly char _separator;
 
-        internal SeparatorNamingPolicy(bool lowercase, char separator)
+        internal SeparatorConverter(bool lowercase, char separator)
         {
             Debug.Assert(char.IsPunctuation(separator));
 

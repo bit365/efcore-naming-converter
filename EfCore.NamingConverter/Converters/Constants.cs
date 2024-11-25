@@ -1,6 +1,6 @@
-﻿namespace EfCore.NamingConverter
+﻿namespace EfCore.NamingConverter.Converters
 {
-    public static class Constants
+    internal static class Constants
     {
         public const int StackallocByteThreshold = 256;
 

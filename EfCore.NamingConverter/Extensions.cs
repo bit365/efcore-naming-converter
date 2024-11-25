@@ -1,3 +1,5 @@
+using EfCore.NamingConverter.Conventions;
+using EfCore.NamingConverter.Converters;
 using Microsoft.EntityFrameworkCore;
 
 namespace EfCore.NamingConverter
@@ -6,8 +8,14 @@ namespace EfCore.NamingConverter
     {
         public static void AddNamingConventions(this ModelConfigurationBuilder configurationBuilder, NamingPolicy namingPolicy = NamingPolicy.Unspecified)
         {
-            configurationBuilder.Conventions.Add(_ => new TableNameConvention(namingPolicy));
-            configurationBuilder.Conventions.Add(_ => new ColumnNameConvention(namingPolicy));
+            NameConverter converter = NameConverter.From(namingPolicy);
+
+            configurationBuilder.Conventions.Add(_ => new TableNameConvention(converter));
+            configurationBuilder.Conventions.Add(_ => new ViewNameConvention(converter));
+            configurationBuilder.Conventions.Add(_ => new ColumnNameConvention(converter));
+            configurationBuilder.Conventions.Add(_ => new IndexNameConvention(converter));
+            configurationBuilder.Conventions.Add(_ => new KeyNameConvention(converter));
+            configurationBuilder.Conventions.Add(_ => new ForeignKeyNameConvention(converter));
         }
     }
 }
