@@ -5,11 +5,29 @@ namespace EfCore.NamingConverter.Tests.Converters
     public class KebabCaseLowerConverterTest
     {
         [Fact]
-        public void CanConvertNameToKebabCaseLower()
+        public void ConvertName_ShouldReturnKebabCaseLower()
         {
-            var converter = new KebabCaseLowerConverter();
+            // Arrange
+            var kebabCaseConverter = new KebabCaseLowerConverter();
 
-            Assert.Equal("kebab-case-lower", converter.ConvertName("KebabCaseLower"));
+            // Act
+            var actual = kebabCaseConverter.ConvertName("FullName");
+
+            // Assert
+            Assert.Equal("full-name", actual);
+        }
+
+        [Fact]
+        public void ConvertName_InputEmpty_ShouldReturnEmpty()
+        {
+            // Arrange
+            var kebabCaseConverter = new KebabCaseLowerConverter();
+
+            // Act
+            var actual = kebabCaseConverter.ConvertName(string.Empty);
+
+            // Assert
+            Assert.Equal(string.Empty, actual);
         }
     }
 }

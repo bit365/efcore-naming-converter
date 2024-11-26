@@ -5,11 +5,29 @@ namespace EfCore.NamingConverter.Tests.Converters
     public class CamelCaseConverterTest
     {
         [Fact]
-        public void CanConvertNameToCamelCase()
+        public void ConvertName_ShouldReturnCamelCase()
         {
-            var converter = new CamelCaseConverter();
+            // Arrange
+            var camelCaseConverter = new CamelCaseConverter();
 
-            Assert.Equal("camelCaseName", converter.ConvertName("CamelCaseName"));
+            // Act
+            var actual = camelCaseConverter.ConvertName("FullName");
+
+            // Assert
+            Assert.Equal("fullName", actual);
+        }
+
+        [Fact]
+        public void ConvertName_InputEmpty_ShouldReturnEmpty()
+        {
+            // Arrange
+            var camelCaseConverter = new CamelCaseConverter();
+
+            // Act
+            var actual = camelCaseConverter.ConvertName(string.Empty);
+
+            // Assert
+            Assert.Equal(string.Empty, actual);
         }
     }
 }

@@ -12,10 +12,10 @@ namespace EfCore.NamingConverter.Tests.Converters
         }
 
         [Fact]
-        public void CanConvertNameToSnakeCaseLower()
+        public void ConvertName_ShouldReturnSnakeCaseLower()
         {
             var converter = new MySeparatorConverter();
-            Assert.Equal("snake_case_lower", converter.ConvertName("SnakeCaseLower"));
+            Assert.Equal("full_name", converter.ConvertName("FullName"));
         }
     }
 }

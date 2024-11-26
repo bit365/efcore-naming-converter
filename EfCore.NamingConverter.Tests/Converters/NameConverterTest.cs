@@ -11,7 +11,7 @@ namespace EfCore.NamingConverter.Tests.Converters
         [InlineData(NamingPolicy.KebabCaseLower, "FullName", "full-name")]
         [InlineData(NamingPolicy.KebabCaseUpper, "FullName", "FULL-NAME")]
         [InlineData(NamingPolicy.Unspecified, "FullName", "FullName")]
-        public void CanConvertName(NamingPolicy namingPolicy, string input, string expected)
+        public void ConvertName_ShouldReturnConvertedName(NamingPolicy namingPolicy, string input, string expected)
         {
             var converter = NameConverter.From(namingPolicy);
             Assert.Equal(expected, converter.ConvertName(input));

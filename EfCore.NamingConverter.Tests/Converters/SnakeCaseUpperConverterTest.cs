@@ -5,11 +5,29 @@ namespace EfCore.NamingConverter.Tests.Converters
     public class SnakeCaseUpperConverterTest
     {
         [Fact]
-        public void CanConvertNameToSnakeCaseUpper()
+        public void ConvertName_ShouldReturnSnakeCaseUpper()
         {
-            var converter = new SnakeCaseUpperConverter();
+            // Arrange
+            var snakeCaseConverter = new SnakeCaseUpperConverter();
 
-            Assert.Equal("SNAKE_CASE_NAME", converter.ConvertName("SnakeCaseName"));
+            // Act
+            var actual = snakeCaseConverter.ConvertName("FullName");
+
+            // Assert
+            Assert.Equal("FULL_NAME", actual);
+        }
+
+        [Fact]
+        public void ConvertName_InputEmpty_ShouldReturnEmpty()
+        {
+            // Arrange
+            var snakeCaseConverter = new SnakeCaseUpperConverter();
+
+            // Act
+            var actual = snakeCaseConverter.ConvertName(string.Empty);
+
+            // Assert
+            Assert.Equal(string.Empty, actual);
         }
     }
 }

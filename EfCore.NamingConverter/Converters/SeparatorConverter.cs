@@ -20,10 +20,7 @@ namespace EfCore.NamingConverter.Converters
 
         public sealed override string ConvertName(string name)
         {
-            if (name is null)
-            {
-                ArgumentNullException.ThrowIfNull(name, nameof(name));
-            }
+            ArgumentNullException.ThrowIfNull(name, nameof(name));
 
             return ConvertNameCore(_separator, _lowercase, name.AsSpan());
         }
