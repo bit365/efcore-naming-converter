@@ -6,7 +6,7 @@ namespace EfCore.NamingConverter.Tests
 {
     public class MyTestHelpers : TestHelpers
     {
-        private static readonly Lazy<MyTestHelpers> _instance = new Lazy<MyTestHelpers>(() => new MyTestHelpers());
+        private static readonly Lazy<MyTestHelpers> _instance = new(() => new MyTestHelpers());
 
         private MyTestHelpers() { }
 

@@ -10,12 +10,7 @@ namespace EfCore.NamingConverter
         {
             NameConverter converter = NameConverter.From(namingPolicy);
 
-            configurationBuilder.Conventions.Add(_ => new TableNameConvention(converter));
-            configurationBuilder.Conventions.Add(_ => new ViewNameConvention(converter));
-            configurationBuilder.Conventions.Add(_ => new ColumnNameConvention(converter));
-            configurationBuilder.Conventions.Add(_ => new IndexNameConvention(converter));
-            configurationBuilder.Conventions.Add(_ => new KeyNameConvention(converter));
-            configurationBuilder.Conventions.Add(_ => new ForeignKeyNameConvention(converter));
+            configurationBuilder.Conventions.Add(services => new NamingConvention(services, converter));
         }
     }
 }
