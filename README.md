@@ -2,8 +2,7 @@
 
  ## Introduction
 
-This project provides a naming converter for Entity Framework Core to support different database naming conventions. The source code passes System.Text.Json
- and EFCore.NamingConventions source code modified to support .NET 8.0 and .NET 9.0 versions.
+This project provides a naming converter for Entity Framework Core to accommodate various database naming conventions. The naming strategy is inspired by the source code of System.Text.Json, while the implementation of the conventioner is derived from the source code of EFCore.NamingConventions. The project is compatible with and supports .NET 8.0 and .NET 9.0 versions.
 
 ## Installation
 
@@ -12,7 +11,7 @@ dotnet add package EfCore.NamingConverter
 ```
 ## Usage
 
-Using the naming converter in the DbContext class is the default configuration method by Microsoft. You only need to add the naming converter in the ConfigureConventions method. In the next version, we are considering providing DbContextOptions configuration options for easier configuration.
+The recommended approach is to utilize a naming converter within the DbContext class by overriding the ConfigureConventions method to add it.
 ```csharp
 using EfCore.NamingConverter;
 
@@ -25,7 +24,7 @@ public class MyDbContext : DbContext
 }
 ```
 
-## Rules
+## Policies
 
 | Naming Policy  | Original | Converted |
 |----------------|--------------|--------------|
@@ -35,9 +34,3 @@ public class MyDbContext : DbContext
 | SnakeCaseUpper | FullName  | FULL_NAME |
 | KebabCaseLower | FullName  | full-name |
 | KebabCaseUpper | FullName  | FULL-NAME |
-
-## Github
-
-https://github.com/bit365/efcore-naming-converter
-
-If you are interested in this project, feel free to star and fork it. You are also welcome to submit issues and pull requests to help us improve the project.
