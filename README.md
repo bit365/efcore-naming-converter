@@ -2,7 +2,8 @@
 
  ## Introduction
 
-This project provides a naming converter for Entity Framework Core to convert table and column names to specified naming conventions. The source code refers to the naming strategy implementation in the System.Text.Json library.  We welcome suggestions to help us improve it.
+This project provides a naming converter for Entity Framework Core to support different database naming conventions. The source code passes System.Text.Json
+ and EFCore.NamingConventions source code modified to support .NET 8.0 and .NET 9.0 versions.
 
 ## Installation
 
