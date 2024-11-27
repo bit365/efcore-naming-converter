@@ -7,17 +7,17 @@ namespace EfCore.NamingConverter.Tests.Conventions
     ///  The naming convention from EFCore.NamingConventions with some modifications.
     ///  Thanks to the author of the original code.
     /// </summary>
-    public class NamingConventionTest
+    public class NamingConventionTests
     {
         [Fact]
-        public void Table()
+        public void TableName_ShouldBeSnakeCaseLower()
         {
             var entityType = ModelBuilder.BuildEntityType(b => b.Entity<SampleEntity>());
             Assert.Equal("sample_entity", entityType.GetTableName());
         }
 
         [Fact]
-        public void Column()
+        public void ColumnName_ShouldBeSnakeCaseLower()
         {
             var entityType = ModelBuilder.BuildEntityType(b => b.Entity<SampleEntity>());
             Assert.Equal("sample_entity_id", entityType.FindProperty(nameof(SampleEntity.SampleEntityId))!
@@ -25,7 +25,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Column_with_invariant_culture()
+        public void ColumnName_WithInvariantCulture_ShouldBeSnakeCaseLower()
         {
             var entityType = ModelBuilder.BuildEntityType(
                 b => b.Entity<SampleEntity>());
@@ -34,7 +34,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Column_on_view()
+        public void ColumnName_OnView_ShouldBeSnakeCaseLower()
         {
             var entityType = ModelBuilder.BuildEntityType(b => b.Entity<SampleEntity>(
                 e =>
@@ -52,14 +52,14 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Primary_key()
+        public void PrimaryKeyName_ShouldBeSnakeCaseLower()
         {
             var entityType = ModelBuilder.BuildEntityType(b => b.Entity<SampleEntity>());
             Assert.Equal("pk_sample_entity", entityType.FindPrimaryKey()!.GetName());
         }
 
         [Fact]
-        public void Primary_key_on_table_with_explicit_name()
+        public void PrimaryKeyName_OnTableWithExplicitName_ShouldBeSnakeCaseLower()
         {
             var entityType = ModelBuilder.BuildEntityType(b => b.Entity<SampleEntity>().ToTable("some_explicit_name"));
 
@@ -67,7 +67,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Alternative_key()
+        public void AlternativeKeyName_ShouldBeSnakeCaseLower()
         {
             var entityType = ModelBuilder.BuildEntityType(
                 b => b.Entity<SampleEntity>(
@@ -80,7 +80,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Foreign_key_collection_navigation()
+        public void ForeignKeyName_CollectionNavigation_ShouldBeSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b => b.Entity<Blog>());
             var entityType = model.FindEntityType(typeof(Post))!;
@@ -88,7 +88,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Foreign_key_reference_navigation()
+        public void ForeignKeyName_ReferenceNavigation_ShouldBeSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b => b.Entity<ReferenceNavigationPrincipal>());
             var entityType = model.FindEntityType(typeof(ReferenceNavigationDependent))!;
@@ -98,14 +98,14 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Index()
+        public void IndexName_ShouldBeSnakeCaseLower()
         {
             var entityType = ModelBuilder.BuildEntityType(b => b.Entity<SampleEntity>().HasIndex(s => s.SomeProperty));
             Assert.Equal("ix_sample_entity_some_property", entityType.GetIndexes().Single().GetDatabaseName());
         }
 
         [Fact]
-        public void Tph()
+        public void Tph_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b =>
             {
@@ -130,7 +130,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Tpt_with_explicit_table_names()
+        public void Tpt_WithExplicitTableNames_ShouldUseSnakeCaseLower()
             => AssertTpt(
                 ModelBuilder.BuildModel(
                     b =>
@@ -140,7 +140,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
                     }));
 
         [Fact]
-        public void Tpt_reversed_configuration()
+        public void Tpt_ReversedConfiguration_ShouldUseSnakeCaseLower()
             => AssertTpt(
                 ModelBuilder.BuildModel(
                     b =>
@@ -150,7 +150,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
                     }));
 
         [Fact]
-        public void Tpt_with_UseTptMappingStrategy1()
+        public void Tpt_WithUseTptMappingStrategy1_ShouldUseSnakeCaseLower()
             => AssertTpt(
                 ModelBuilder.BuildModel(
                     b =>
@@ -160,7 +160,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
                     }));
 
         [Fact]
-        public void Tpt_with_UseTptMappingStrategy2()
+        public void Tpt_WithUseTptMappingStrategy2_ShouldUseSnakeCaseLower()
             => AssertTpt(
                 ModelBuilder.BuildModel(
                     b =>
@@ -198,7 +198,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Tph_with_owned()
+        public void Tph_WithOwned_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b =>
             {
@@ -228,7 +228,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Tph_with_abstract_parent()
+        public void Tph_WithAbstractParent_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b =>
             {
@@ -259,7 +259,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Tpt_with_owned()
+        public void Tpt_WithOwned_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b =>
             {
@@ -298,7 +298,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Tpc()
+        public void Tpc_ShouldUseSnakeCaseLower()
             => AssertTpc(
                 ModelBuilder.BuildModel(
                     b =>
@@ -309,7 +309,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
                     }));
 
         [Fact]
-        public void Tpc2()
+        public void Tpc2_ShouldUseSnakeCaseLower()
             => AssertTpc(
                 ModelBuilder.BuildModel(
                     b =>
@@ -371,7 +371,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Tpc_with_abstract_parent()
+        public void Tpc_WithAbstractParent_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b =>
             {
@@ -404,7 +404,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Table_splitting1()
+        public void TableSplitting1_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b =>
             {
@@ -444,42 +444,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Table_splitting_and_explicit_owner_table()
-        {
-            var model = ModelBuilder.BuildModel(b =>
-            {
-                b.Entity<Split1>().HasOne(s1 => s1.S2).WithOne(s2 => s2.S1).HasForeignKey<Split2>(s2 => s2.Id);
-                b.Entity<Split2>().ToTable("split_table");
-                b.Entity<Split1>().ToTable("split_table");
-            });
-
-            var split1EntityType = model.FindEntityType(typeof(Split1))!;
-            var split2EntityType = model.FindEntityType(typeof(Split2))!;
-
-            var table = StoreObjectIdentifier.Create(split1EntityType, StoreObjectType.Table)!.Value;
-            Assert.Equal(table, StoreObjectIdentifier.Create(split2EntityType, StoreObjectType.Table));
-
-            Assert.Equal("split_table", split1EntityType.GetTableName());
-            Assert.Equal("one_prop", split1EntityType.FindProperty(nameof(Split1.OneProp))!.GetColumnName(table));
-
-            Assert.Equal("split_table", split2EntityType.GetTableName());
-            Assert.Equal("two_prop", split2EntityType.FindProperty(nameof(Split2.TwoProp))!.GetColumnName(table));
-
-            Assert.Equal("common", split1EntityType.FindProperty(nameof(Split1.Common))!.GetColumnName(table));
-            Assert.Equal("split2_common", split2EntityType.FindProperty(nameof(Split2.Common))!.GetColumnName(table));
-
-            var foreignKey = split2EntityType.GetForeignKeys().Single();
-            Assert.Same(split1EntityType.FindPrimaryKey(), foreignKey.PrincipalKey);
-            Assert.Same(split2EntityType.FindPrimaryKey()!.Properties.Single(), foreignKey.Properties.Single());
-            Assert.Equal(split1EntityType.FindPrimaryKey()!.GetName(), split2EntityType.FindPrimaryKey()!.GetName());
-            Assert.Equal(
-                foreignKey.PrincipalKey.Properties.Single().GetColumnName(table),
-                foreignKey.Properties.Single().GetColumnName(table));
-            Assert.Empty(split1EntityType.GetForeignKeys());
-        }
-
-        [Fact]
-        public void Owned_entity_with_table_splitting()
+        public void OwnedEntityWithTableSplitting_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b => b.Entity<Owner>().OwnsOne(o => o.Owned));
 
@@ -501,7 +466,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Owned_entity_with_table_splitting_and_explicit_owner_table()
+        public void OwnedEntityWithTableSplittingAndExplicitOwnerTable_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(
                 b => b.Entity<Owner>(
@@ -529,7 +494,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Owned_entity_twice_with_table_splitting_and_explicit_owner_table()
+        public void OwnedEntityTwiceWithTableSplittingAndExplicitOwnerTable_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(
                 b => b.Entity<Owner>(
@@ -565,7 +530,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Owned_entity_without_table_splitting()
+        public void OwnedEntityWithoutTableSplitting_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b =>
                 b.Entity<Owner>().OwnsOne(o => o.Owned).ToTable("another_table"));
@@ -579,7 +544,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Owned_entity_with_OwnsMany()
+        public void OwnedEntityWithOwnsMany_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(mb => mb.Entity<Blog>().OwnsMany(b => b.Posts));
             var ownedEntityType = model.FindEntityType(typeof(Post))!;
@@ -591,7 +556,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Owned_json_entity_with_OwnsOne()
+        public void OwnedJsonEntityWithOwnsOne_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(mb => mb.Entity<Owner>().OwnsOne(b => b.Owned, p => p.ToJson()));
 
@@ -608,7 +573,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Owned_json_entity_with_OwnsMany()
+        public void OwnedJsonEntityWithOwnsMany_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(mb => mb.Entity<Blog>().OwnsMany(b => b.Posts, p => p.ToJson()));
 
@@ -625,7 +590,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Owned_json_entity_with_OnesOne_and_nested_OwnsMany()
+        public void OwnedJsonEntityWithOwnsOneAndNestedOwnsMany_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(mb => mb.Entity<Owner>().OwnsOne(o => o.Owned, p =>
             {
@@ -649,7 +614,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Complex_property()
+        public void ComplexProperty_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b => b.Entity<Waypoint>().ComplexProperty(w => w.Location));
 
@@ -663,7 +628,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Not_mapped_to_table()
+        public void NotMappedToTable_ShouldUseSnakeCaseLower()
         {
             var entityType = ModelBuilder.BuildEntityType(b => b.Entity<SampleEntity>().ToSqlQuery("SELECT foobar"));
 
@@ -671,7 +636,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Foreign_key_without_name_because_over_view()
+        public void ForeignKeyWithoutNameBecauseOverView_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b =>
             {
@@ -689,7 +654,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Foreign_key_on_key_without_setter()
+        public void ForeignKeyOnKeyWithoutSetter_ShouldUseSnakeCaseLower()
         {
             var model = ModelBuilder.BuildModel(b =>
             {

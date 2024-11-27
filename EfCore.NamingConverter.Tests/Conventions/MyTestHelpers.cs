@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EfCore.NamingConverter.Tests
+namespace EfCore.NamingConverter.Tests.Conventions
 {
     public class MyTestHelpers : TestHelpers
     {

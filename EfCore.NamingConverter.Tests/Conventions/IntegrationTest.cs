@@ -6,10 +6,10 @@ namespace EfCore.NamingConverter.Tests.Conventions
     ///  The naming convention from EFCore.NamingConventions with some modifications.
     ///  Thanks to the author of the original code.
     /// </summary>
-    public class IntegrationTest
+    public class IntegrationTests
     {
         [Fact]
-        public void Table_name_is_taken_from_DbSet_property()
+        public void TableNameIsTakenFromDbSetProperty()
         {
             using var context = new BlogContext();
             var entityType = context.Model.FindEntityType(typeof(Blog))!;
@@ -23,7 +23,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Table_name_is_taken_from_DbSet_property_with_TPH()
+        public void TableNameIsTakenFromDbSetPropertyWithTPH()
         {
             using var context = new TphBlogContext();
 
@@ -45,7 +45,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         }
 
         [Fact]
-        public void Table_name_is_taken_from_DbSet_property_with_TPT()
+        public void TableNameIsTakenFromDbSetPropertyWithTPT()
         {
             using var context = new TptBlogContext();
 
@@ -100,6 +100,7 @@ namespace EfCore.NamingConverter.Tests.Conventions
         public class TphBlogContext : DbContext
         {
             public DbSet<Blog> Blogs { get; set; } = null!;
+
             public DbSet<SpecialBlog> SpecialBlogs { get; set; } = null!;
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
