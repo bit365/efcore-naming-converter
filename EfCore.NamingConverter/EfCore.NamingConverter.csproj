@@ -8,7 +8,7 @@
 		<Description>Entity Framework Core Naming Converter</Description>
 		<RepositoryUrl>https://github.com/bit365/efcore-naming-converter</RepositoryUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Version>1.0.9</Version>
+		<Version>1.0.10</Version>
 	</PropertyGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="[9.0.0, )" />
